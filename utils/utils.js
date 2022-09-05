@@ -90,8 +90,34 @@ const formatPacket = (packet) => {
   return finalPacket;
 };
 
+const isValidJson = (json) => {
+  try {
+    JSON.parse(json);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+const isValidJsonObject = (json) => {
+  if (typeof json !== "string") {
+    return false;
+  }
+
+  const startsWithOpeningCurlyBrace = json.indexOf("{") === 0;
+  const endsWithClosingCurlyBrace = json.lastIndexOf("}") === json.length - 1;
+
+  if (startsWithOpeningCurlyBrace && endsWithClosingCurlyBrace) {
+    return isValidJson(json);
+  }
+
+  return false;
+};
+
 module.exports = {
   transformData,
   transformToJson,
   formatPacket,
+  isValidJson,
+  isValidJsonObject,
 };
