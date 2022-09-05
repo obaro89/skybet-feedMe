@@ -1,5 +1,9 @@
 const net = require("net");
-const { transformData, transformToJson } = require("./utils/utils.js");
+const {
+  transformData,
+  transformToJson,
+  formatPacket,
+} = require("./utils/utils.js");
 
 const client = new net.Socket();
 
@@ -9,8 +13,11 @@ client.connect(8282, "provider", function () {
 
 client.on("data", function (data) {
   console.log(data.toString());
-  const structuredData = transformData(data);
-  console.log(transformToJson(structuredData));
+
+  const formatedPackets = formatPacket(data);
+  formatedPackets.forEach((formatedPacket) =>
+    console.log(transformToJson(transformData(formatedPacket)))
+  );
 });
 
 client.on("close", function () {

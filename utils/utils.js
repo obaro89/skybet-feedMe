@@ -1,9 +1,4 @@
 const transformData = (packet) => {
-  packet = packet
-    .toString()
-    .replace(/\\/g, "")
-    .split("|")
-    .filter((element) => element);
   const [msgId, operation, type, timestamp, ...rest] = packet;
 
   const packerHeader = {
@@ -70,7 +65,7 @@ const transformData = (packet) => {
       };
     }
     default:
-      return {};
+      break;
   }
 
   return {
@@ -81,7 +76,22 @@ const transformData = (packet) => {
 
 const transformToJson = (data) => JSON.stringify(data);
 
+const formatPacket = (packet) => {
+  let stringPacket = packet.toString();
+  stringPacket = stringPacket.replace(/\\/g, "");
+  let arrayPacket = stringPacket.split("\n");
+
+  arrayPacket = arrayPacket.filter((e) => e);
+
+  const finalPacket = arrayPacket.map((str) => {
+    return str.split("|").filter((e) => e);
+  });
+
+  return finalPacket;
+};
+
 module.exports = {
   transformData,
   transformToJson,
+  formatPacket,
 };
