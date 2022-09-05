@@ -1,4 +1,4 @@
-version: '2'
+version: "2"
 services:
   #mongo:
   #  image: mongo
@@ -34,7 +34,15 @@ services:
   #      RABBITMQ_DEFAULT_VHOST: "/feedme"
 
   provider:
-      image: sbgfeedme/provider:latest
-      ports:
-        - "8181:8181"
-        - "8282:8282"
+    image: sbgfeedme/provider:latest
+    ports:
+      - "8181:8181"
+      - "8282:8282"
+
+  backend:
+    build: .
+    links:
+      - provider
+
+    depends_on:
+      - provider
