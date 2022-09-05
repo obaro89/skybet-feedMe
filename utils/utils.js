@@ -79,7 +79,7 @@ const transformData = (packet) => {
   };
 };
 
-const transformToJson = (data) => data; //JSON.stringify(data);
+const transformToJson = (data) => JSON.stringify(data);
 
 module.exports = {
   transformData,
