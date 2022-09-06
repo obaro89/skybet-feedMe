@@ -19,7 +19,8 @@
   "homepage": "https://github.com/skybet/feedme-tech-test#readme",
   "keywords": [],
   "dependencies": {
-    "jest": "29.0.2"
+    "jest": "29.0.2",
+    "mongoose": "6.5.4"
   },
   "devDependencies": {
     "nodemon": "2.0.19"

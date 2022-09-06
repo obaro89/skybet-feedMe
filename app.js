@@ -4,6 +4,10 @@ const {
   transformToJson,
   formatPacket,
 } = require("./utils/utils.js");
+const connectToDatabase = require("./database/database");
+const main = require("./controller/main");
+
+connectToDatabase();
 
 const client = new net.Socket();
 
@@ -16,7 +20,7 @@ client.on("data", function (data) {
 
   const formatedPackets = formatPacket(data);
   formatedPackets.forEach((formatedPacket) =>
-    console.log(transformToJson(transformData(formatedPacket)))
+    main(transformToJson(transformData(formatedPacket)))
   );
 });
 
