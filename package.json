@@ -20,7 +20,8 @@
   "keywords": [],
   "dependencies": {
     "jest": "29.0.2",
-    "mongoose": "6.5.4"
+    "mongoose": "6.5.4",
+    "kafkajs": "2.2.0"
   },
   "devDependencies": {
     "nodemon": "2.0.19"

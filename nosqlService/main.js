@@ -21,7 +21,7 @@ const consume = async () => {
 
     await consumer.run({
       eachMessage: async ({ topic, partition, message }) => {
-        console.log("mongo service has received the topic" + message.value);
+        console.log("mongo service has received topic" + message.value);
         main(message.value);
       },
     });
@@ -29,5 +29,5 @@ const consume = async () => {
     console.log(error);
   }
 };
-
+//
 consume().catch(console.error);
