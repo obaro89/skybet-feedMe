@@ -15,6 +15,7 @@ client.connect(8282, "provider", function () {
 const kafka = new Kafka({
   clientId: "skybet-provider",
   brokers: ["kafka:9092"],
+  enforceRequestTimeout: false,
 });
 
 const producer = kafka.producer();

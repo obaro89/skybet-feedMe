@@ -1,17 +1,46 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const connectToDatabase = require("./database/database");
-const Event = require("./models/event");
 
-connectToDatabase();
-const app = express();
+class App {
+  express;
+  port;
 
-app.get("/betfeeds", (req, res) => {
-  res.json({
-    message: "Hello express",
-  });
-});
+  constructor(controllers, port) {
+    this.express = express();
+    this.port = port;
+    this.connectToDatabase();
+    this.initializeMiddleWare();
+    this.inititializeControllers(controllers);
+  }
 
-app.listen(4000, () => {
-  console.log("server is running on port 4000");
-});
+  async connectToDatabase() {
+    try {
+      await mongoose.connect(`mongodb://mongo:27017/fixtures`, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
+      console.log("Database is connected");
+    } catch (error) {
+      console.log("Error connecting to database", error);
+    }
+  }
+
+  initializeMiddleWare() {
+    this.express.use(express.json());
+    this.express.use(express.urlencoded({ extended: false }));
+  }
+
+  inititializeControllers(controllers) {
+    controllers.forEach((controller) => {
+      this.express.use("/api", controller.router);
+    });
+  }
+
+  listen() {
+    this.express.listen(this.port, () => {
+      console.log(`Application is running on port ${this.port}`);
+    });
+  }
+}
+
+module.exports = App;

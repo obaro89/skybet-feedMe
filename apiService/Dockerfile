@@ -8,4 +8,4 @@ RUN npm install -g nodemon
 
 COPY . .
 
-CMD [ "nodemon", "server.js" ]
+CMD [ "nodemon", "index.js" ]

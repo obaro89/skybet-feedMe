@@ -2,6 +2,7 @@ version: "2"
 services:
   mongo:
     image: mongo
+    container_name: mongodb
     ports:
       - "27017:27017"
 
@@ -57,3 +58,9 @@ services:
     links:
       - mongo
       - kafka
+  apiservice:
+    build: ./apiService
+    links:
+      - mongo
+    ports:
+      - "4000:4000"
