@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 class App {
   express;
@@ -26,6 +27,7 @@ class App {
   }
 
   initializeMiddleWare() {
+    this.express.use(cors());
     this.express.use(express.json());
     this.express.use(express.urlencoded({ extended: false }));
   }

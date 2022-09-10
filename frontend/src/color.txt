@@ -1,0 +1,5 @@
+sidebarskyblue=#020231
+mainblue=#0E245F
+gray=#EBEFF4
+white=#FFFFFF
+betslip-rightbar=#EFF4FB
